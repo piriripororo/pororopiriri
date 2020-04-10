@@ -22,7 +22,7 @@ autoCollectRegion = Region(205, 855, 10, 10)
 -- setAlternativeClick(true)
 coinApp = Region(115, 1030, 10, 10)
 
-setBrightness(0)
+-- setBrightness(0)
 blocksRegions = {
   Region(50, 280, 10, 10),
   Region(210, 280, 10, 10),
