@@ -17,7 +17,7 @@ backslashRegion = Region(265, 855, 10, 10)
 -- wait(1000)
 -- backslashRegion2 = Region(342, 1142, 10, 10)
 
-regionOfVerification = Region(250, 110, 200, 80)
+regionOfVerification = Region(10, 130, 80, 500)
 autoCollectRegion = Region(205, 855, 10, 10)
 -- setAlternativeClick(true)
 coinApp = Region(115, 1030, 10, 10)
@@ -88,7 +88,7 @@ closeAdRegion = Region(680, 45, 10, 10)
 videoRegion = Region(10, 280, 110, 500)
 
 -- regionToCheckWitness = Region(520, 500, 30, 30)
-regionToCheckPlay = Region(450, 760, 10, 10)
+regionToCheckPlay = Region(320, 570, 10, 10)
 
 finishAd = Region(220, 1110, 10, 10)
 
@@ -96,7 +96,7 @@ gpsRegion = Region(490, 170, 10, 10)
 
 autoCollectRegion = Region(205, 860, 10, 10)
 
-resumeRegion = Region(326, 406, 10, 10)
+resumeRegion = Region(250, 300, 10, 10)
 
 pickRegion = Region(230, 700, 10, 10)
 
@@ -105,8 +105,8 @@ numberOfLoops = 0
 while true do
   numberOfLoops = numberOfLoops + 1
   if numberOfLoops > 20 then
-    pcall(httpGet("https://tinyurl.com/ua3ttbe/restart-samsung"))
-  	wait(600)
+    -- pcall(httpGet("https://tinyurl.com/ua3ttbe/restart-samsung"))
+  	-- wait(600)
   end
   -- --toast(numberOfLoops)
   -- pcall(httpGet, "http://3.132.75.40/ok/")
@@ -130,9 +130,8 @@ while true do
     click(pickRegion)
   end
   usePreviousSnap(false)
-  -- videoPattern = Pattern("video.png"):similar(0.4)
-  -- didFoundVideo = videoRegion:existsClick(videoPattern, 1)
-  didFoundVideo = false --@EDIT
+  videoPattern = Pattern("video.png"):similar(0.4)
+  didFoundVideo = videoRegion:existsClick(videoPattern, 1)
   if didFoundVideo then
     --toast(tostring(didFoundVideo))
   end
