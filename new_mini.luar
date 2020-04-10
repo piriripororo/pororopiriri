@@ -79,14 +79,14 @@ myRegion = Region(265, 495, 10, 10)
 yesRegion = Region(340, 610, 10, 10)
 
 closeAdRegion = Region(680, 45, 10, 10)
---@EDIT backgroundMiningRegion = Region(430, 1010, 10, 10)
+backgroundMiningRegion = Region(330, 760, 10, 10)
 
 videoRegion = Region(10, 280, 110, 500)
 
 -- regionToCheckWitness = Region(520, 500, 30, 30)
 regionToCheckPlay = Region(320, 570, 10, 10)
 
-finishAd = Region(220, 1110, 10, 10)
+finishAd = Region(140, 840, 10, 10)
 
 gpsRegion = Region(490, 170, 10, 10)
 
@@ -110,10 +110,10 @@ while true do
   end
   -- --toast(numberOfLoops)
   -- pcall(httpGet, "http://3.132.75.40/ok/")
-  -- @EDITr,g,b = getColor(backgroundMiningRegion)
-  -- if (r == 9 and g == 186 and b == 166) then
-  --   click(backgroundMiningRegion)
-  -- end
+  r,g,b = getColor(backgroundMiningRegion)
+  if (r == 9 and g == 186 and b == 166) then
+    click(backgroundMiningRegion)
+  end
 
   match = false
   itsColor = false
