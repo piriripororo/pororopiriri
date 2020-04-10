@@ -1,0 +1,628 @@
+-- for i = 1, 7 do
+--   toast(tostring(i))
+--   wait(5)
+-- end
+immersive = true
+setImmersiveMode(immersive)
+setAutoGameArea = true
+pcall (autoGameArea, setAutoGameArea)
+scriptDimension = 540
+Settings:setScriptDimension(true, scriptDimension)
+Settings:setCompareDimension(true, scriptDimension)
+closeCoinRegion = Region(640, 885, 10, 10)
+backslashRegion = Region(265, 855, 10, 10)
+-- r,g,b = getColor(backslashRegion)
+-- backslashRegion:highlight()
+-- print(r,g,b)
+-- wait(1000)
+-- backslashRegion2 = Region(342, 1142, 10, 10)
+
+regionOfVerification = Region(250, 110, 200, 80)
+autoCollectRegion = Region(205, 855, 10, 10)
+-- setAlternativeClick(true)
+coinApp = Region(115, 1030, 10, 10)
+
+setBrightness(0)
+blocksRegions = {
+  Region(50, 280, 10, 10),
+  Region(210, 280, 10, 10),
+  Region(370, 280, 10, 10),
+  Region(50, 440, 10, 10),
+  Region(210, 440, 10, 10),
+  Region(370, 440, 10, 10),
+  Region(50, 600, 10, 10),
+  Region(210, 600, 10, 10),
+  Region(370, 600, 10, 10)
+}
+
+newGameBlocksSlideRegions = {
+  Region(15, 500, 10, 10),
+  Region(80, 500, 10, 10),
+  Region(225, 500, 10, 10),
+  Region(370, 500, 10, 10),
+  Region(520, 500, 10, 10)
+}
+
+mainSlideRegion1 = Region(80, 390, 10, 10)
+mainSlideRegion2 = Region(225, 390, 10, 10)
+mainSlideRegion3 = Region(370, 390, 10, 10)
+
+matchRegions = {
+  Region(210, 250, 10, 10),
+  Region(460, 430, 10, 10),
+  Region(210, 750, 10, 10),
+  Region(80, 430, 10, 10)
+}
+
+mainMatchRegion = Region(200, 400, 10, 10)
+
+possibleColors = {
+  {85, 177, 187},
+  {146, 53, 204},
+  {240, 138, 72},
+  {118, 214, 125},
+  {248, 127, 255},
+  {119, 176, 255},
+  {236, 96, 96},
+  {250, 223, 90}
+}
+
+alternativePossibleColors = {
+  {69, 144, 152},
+  {118, 43, 165},
+  {193, 111, 60},
+  {95, 173, 102},
+  {203, 107, 209},
+  {96, 142, 206},
+  {189, 79, 79},
+  {201, 180, 74}
+}
+
+myRegion = Region(265, 495, 10, 10)
+
+yesRegion = Region(340, 610, 10, 10)
+
+closeAdRegion = Region(680, 45, 10, 10)
+--@EDIT backgroundMiningRegion = Region(430, 1010, 10, 10)
+
+videoRegion = Region(10, 280, 110, 500)
+
+-- regionToCheckWitness = Region(520, 500, 30, 30)
+regionToCheckPlay = Region(450, 760, 10, 10)
+
+finishAd = Region(220, 1110, 10, 10)
+
+gpsRegion = Region(490, 170, 10, 10)
+
+autoCollectRegion = Region(205, 860, 10, 10)
+
+resumeRegion = Region(326, 406, 10, 10)
+
+pickRegion = Region(230, 700, 10, 10)
+
+notMatch = 0
+numberOfLoops = 0
+while true do
+  numberOfLoops = numberOfLoops + 1
+  if numberOfLoops > 20 then
+    pcall(httpGet("https://tinyurl.com/ua3ttbe/restart-samsung"))
+  	wait(600)
+  end
+  -- --toast(numberOfLoops)
+  -- pcall(httpGet, "http://3.132.75.40/ok/")
+  -- @EDITr,g,b = getColor(backgroundMiningRegion)
+  -- if (r == 9 and g == 186 and b == 166) then
+  --   click(backgroundMiningRegion)
+  -- end
+
+  match = false
+  itsColor = false
+  itsMatch = false
+  itsPair = false
+  itsAlign = false
+  shouldSkip = false
+  shouldSkipItsNew = false
+  itsReallyVideo = false
+  -- click(secondOptionRegion)
+  usePreviousSnap(false)
+  r,g,b = getColor(pickRegion)
+  if ((r < 231 + 5) and (r > 231 - 5) and (g < 232 + 5) and (g > 232 - 5) and (b < 232 + 5) and (b > 232 - 5)) then
+    click(pickRegion)
+  end
+  usePreviousSnap(false)
+  -- videoPattern = Pattern("video.png"):similar(0.4)
+  -- didFoundVideo = videoRegion:existsClick(videoPattern, 1)
+  didFoundVideo = false --@EDIT
+  if didFoundVideo then
+    --toast(tostring(didFoundVideo))
+  end
+
+  wait(1)
+
+  if (didFoundVideo) then
+    -- play
+    --toast("video")
+    errorAdd = false
+    wait(1)
+    rPlay,gPlay,bPlay = getColor(regionToCheckPlay)
+    if (rPlay == 9 and gPlay == 186 and bPlay == 166) then
+      itsReallyVideo = true
+    end
+    if itsReallyVideo then
+      click(regionToCheckPlay)
+      -- pcall(httpGet, "http://3.132.75.40/new_video/")
+      wait(5)
+      usePreviousSnap(false)
+      r,g,b = getColor(resumeRegion)
+      for i = 0, 100 do
+        if ((r == 230) and (g == 91) and (b == 86) or
+        (r == 231) and (g == 91) and (b == 85)) then
+          --toast("should resume")
+          break
+        end
+        --toast(tostring(i))
+        ran = pcall(keyevent, 4)
+        if not ran then
+          pcall(httpGet, "http://3.132.75.40/new_video/")
+        end
+        wait(5)
+        usePreviousSnap(false)
+        r,g,b = getColor(resumeRegion)
+        if (i > 10) then
+          notMatch = 0
+          -- keyevent(187) -- app_switch
+          -- wait(5)
+          -- click(closeCoinRegion)
+          -- -- startRegion = Region(450, 1200, 10, 10)
+          -- -- finishRegion = Region(20, 1200, 10, 10)
+          -- -- swipe(startRegion, finishRegion, 0.5)
+          -- wait(5)
+          -- keyevent(3) -- home
+          -- wait(5)
+          -- keyevent(3) -- home
+          -- click(coinApp)
+          killApp("network.xyo.coin")
+          wait(5)
+          startApp("network.xyo.coin")
+          wait(10)
+          click(autoCollectRegion)
+          errorAdd = true
+          shouldSkip = true
+          break
+        end
+        if (i == 10) then
+          click(closeAdRegion)
+          wait(6)
+          usePreviousSnap(false)
+          r,g,b = getColor(resumeRegion)
+        end
+      end
+      if not (errorAdd) then
+        wait(5)
+        click(finishAd)
+        wait(10)
+        -- pcall(httpGet, "http://3.132.75.40/new_video/")
+        shouldSkip = true
+        match = true
+      end
+    else
+      killApp("network.xyo.coin")
+      wait(5)
+      startApp("network.xyo.coin")
+      wait(10)
+      click(autoCollectRegion)
+    end
+  end
+  click(gpsRegion)
+  for i = 1, 2 do
+    doubleClick(myRegion)
+    wait(1)
+  end
+  myRegion:highlight()
+  wait(1)
+  myRegion:highlightOff()
+  click(myRegion)
+  wait(5)
+  usePreviousSnap(false)
+  r, g, b = getColor(yesRegion)
+  if (r == 9 and g == 186 and b == 166) then
+    click(yesRegion)
+    wait(5)
+  end
+
+  regionOfVerification:highlight()
+  --toast("pair?")
+  itsPair = regionOfVerification:exists("pair.png", 1)
+  if itsPair then
+    --toast("itsPair!")
+  else -- not pair
+    --toast("match?")
+    itsMatch = regionOfVerification:exists("match.png", 1)
+    if itsMatch then
+      --toast("itsMatch!")
+    else -- not match
+      --toast("color?")
+      itsColor = regionOfVerification:exists("colors.png", 1)
+      if itsColor then
+        --toast("itsColor!")
+      else -- not color
+        --toast("align?")
+        itsAlign = regionOfVerification:exists("align.png", 1)
+        if itsAlign then
+          --toast("itsAlign!")
+        end
+      end
+    end
+  end
+  regionOfVerification:highlightOff()
+
+  if itsAlign then
+    -- r,g,b = getColor(Region(460, 1200, 10, 10))
+    -- if not((r == 84) and (g == 85) and (b == 86) or
+    -- (r == 8) and (g == 11) and (b == 11)) then
+    shouldSkipItsNew = true
+    match = true
+    numberOfTries = 0
+    while true do
+      numberOfTries = numberOfTries + 1
+      if numberOfTries > 50 then
+        break
+      end
+      usePreviousSnap(false)
+      snapshotColor()
+      rm1,gm1,bm1 = getColor(mainSlideRegion1)
+      rm2,gm2,bm2 = getColor(mainSlideRegion2)
+      rm3,gm3,bm3 = getColor(mainSlideRegion3)
+      usePreviousSnap(false)
+
+      colorPosition1 = ''
+      colorPosition2 = ''
+      colorPosition3 = ''
+      -- first, find what color it is
+      for i = 1, #alternativePossibleColors do
+        if ((rm1 < alternativePossibleColors[i][1] + 5) and (rm1 > alternativePossibleColors[i][1] - 5) and
+        (gm1 < alternativePossibleColors[i][2] + 5) and (gm1 > alternativePossibleColors[i][2] - 5) and
+        (bm1 < alternativePossibleColors[i][3] + 5) and (bm1 > alternativePossibleColors[i][3] - 5)) then
+          colorPosition1 = i
+          break
+        end
+      end
+
+      for i = 1, #alternativePossibleColors do
+        if ((rm2 < alternativePossibleColors[i][1] + 5) and (rm2 > alternativePossibleColors[i][1] - 5) and
+        (gm2 < alternativePossibleColors[i][2] + 5) and (gm2 > alternativePossibleColors[i][2] - 5) and
+        (bm2 < alternativePossibleColors[i][3] + 5) and (bm2 > alternativePossibleColors[i][3] - 5)) then
+          colorPosition2 = i
+          break
+        end
+      end
+
+      for i = 1, #alternativePossibleColors do
+        if ((rm3 < alternativePossibleColors[i][1] + 5) and (rm3 > alternativePossibleColors[i][1] - 5) and
+        (gm3 < alternativePossibleColors[i][2] + 5) and (gm3 > alternativePossibleColors[i][2] - 5) and
+        (bm3 < alternativePossibleColors[i][3] + 5) and (bm3 > alternativePossibleColors[i][3] - 5)) then
+          colorPosition3 = i
+          break
+        end
+      end
+
+      if (colorPosition1 == '' and colorPosition2 == '' and colorPosition3 == '') then
+        break
+      end
+
+      if not (colorPosition1 == '') then
+        rm1 = possibleColors[colorPosition1][1]
+        gm1 = possibleColors[colorPosition1][2]
+        bm1 = possibleColors[colorPosition1][3]
+      end
+
+      if not (colorPosition2 == '') then
+        rm2 = possibleColors[colorPosition2][1]
+        gm2 = possibleColors[colorPosition2][2]
+        bm2 = possibleColors[colorPosition2][3]
+      end
+
+      if not (colorPosition3 == '') then
+        rm3 = possibleColors[colorPosition3][1]
+        gm3 = possibleColors[colorPosition3][2]
+        bm3 = possibleColors[colorPosition3][3]
+      end
+
+      finishRegion1 = Region(120, 500, 10, 10)
+      finishRegion2 = Region(270, 500, 10, 10)
+      finishRegion3 = Region(420, 500, 10, 10)
+      startRegion = ""
+      found = false
+
+      for i = 1, #newGameBlocksSlideRegions do
+        usePreviousSnap(false)
+        red, green, blue = getColor(newGameBlocksSlideRegions[i])
+        if ((red < rm1 + 5) and (red > rm1 - 5) and (green < gm1 + 5) and (green > gm1 - 5) and (blue < bm1 + 5) and (blue > bm1 - 5)) then
+          startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+          newGameBlocksSlideRegions[i]:getY(),
+          newGameBlocksSlideRegions[i]:getW(),
+          newGameBlocksSlideRegions[i]:getH())
+          found = true
+          --   startRegion:highlight(1)
+          --   finishRegion1:highlight(1)
+          swipe(startRegion, finishRegion1, 0.5)
+          break
+        end
+
+        if ((red < rm2 + 5) and (red > rm2 - 5) and (green < gm2 + 5) and (green > gm2 - 5) and (blue < bm2 + 5) and (blue > bm2 - 5)) then
+          startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+          newGameBlocksSlideRegions[i]:getY(),
+          newGameBlocksSlideRegions[i]:getW(),
+          newGameBlocksSlideRegions[i]:getH())
+          found = true
+          --   startRegion:highlight(1)
+          --   finishRegion2:highlight(1)
+          swipe(startRegion, finishRegion2, 0.5)
+          break
+        end
+
+        if ((red < rm3 + 5) and (red > rm3 - 5) and (green < gm3 + 5) and (green > gm3 - 5) and (blue < bm3 + 5) and (blue > bm3 - 5)) then
+          startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+          newGameBlocksSlideRegions[i]:getY(),
+          newGameBlocksSlideRegions[i]:getW(),
+          newGameBlocksSlideRegions[i]:getH())
+          found = true
+          --   startRegion:highlight(1)
+          --   finishRegion3:highlight(1)
+          swipe(startRegion, finishRegion3, 0.5)
+          break
+        end
+      end
+
+      if found then
+        wait(1)
+        usePreviousSnap(false)
+        snapshotColor()
+        rb,gb,bb = getColor(backslashRegion)
+        -- rb2,gb2,bb2 = getColor(backslashRegion2)
+        usePreviousSnap(false)
+        -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+        -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+        if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+          -- --toast("break")
+          break
+        end
+      else
+        -- newGameBlocksSlideRegions[1]:highlight(1)
+        -- newGameBlocksSlideRegions[5]:highlight(1)
+        swipe(newGameBlocksSlideRegions[1], newGameBlocksSlideRegions[5], 0.5)
+        for i = 1, #newGameBlocksSlideRegions do
+          usePreviousSnap(false)
+          red, green, blue = getColor(newGameBlocksSlideRegions[i])
+
+          if ((red < rm1 + 5) and (red > rm1 - 5) and (green < gm1 + 5) and (green > gm1 - 5) and (blue < bm1 + 5) and (blue > bm1 - 5)) then
+            startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+            newGameBlocksSlideRegions[i]:getY(),
+            newGameBlocksSlideRegions[i]:getW(),
+            newGameBlocksSlideRegions[i]:getH())
+            found = true
+            -- startRegion:highlight(1)
+            -- finishRegion1:highlight(1)
+            swipe(startRegion, finishRegion1, 0.5)
+            break
+          end
+
+          if ((red < rm2 + 5) and (red > rm2 - 5) and (green < gm2 + 5) and (green > gm2 - 5) and (blue < bm2 + 5) and (blue > bm2 - 5)) then
+            startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+            newGameBlocksSlideRegions[i]:getY(),
+            newGameBlocksSlideRegions[i]:getW(),
+            newGameBlocksSlideRegions[i]:getH())
+            found = true
+            -- startRegion:highlight(1)
+            -- finishRegion2:highlight(1)
+            swipe(startRegion, finishRegion2, 0.5)
+            break
+          end
+
+          if ((red < rm3 + 5) and (red > rm3 - 5) and (green < gm3 + 5) and (green > gm3 - 5) and (blue < bm3 + 5) and (blue > bm3 - 5)) then
+            startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+            newGameBlocksSlideRegions[i]:getY(),
+            newGameBlocksSlideRegions[i]:getW(),
+            newGameBlocksSlideRegions[i]:getH())
+            found = true
+            -- startRegion:highlight(1)
+            -- finishRegion3:highlight(1)
+            swipe(startRegion, finishRegion3, 0.5)
+            break
+          end
+
+        end
+        if found then
+          wait(1)
+          usePreviousSnap(false)
+          snapshotColor()
+          rb,gb,bb = getColor(backslashRegion)
+          -- rb2,gb2,bb2 = getColor(backslashRegion2)
+          usePreviousSnap(false)
+          -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+          -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+          if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+            -- --toast("break")
+            break
+          end
+        else
+          --   newGameBlocksSlideRegions[5]:highlight(1)
+          --   newGameBlocksSlideRegions[1]:highlight(1)
+          swipe(newGameBlocksSlideRegions[5], newGameBlocksSlideRegions[1], 0.5)
+          for i = 1, #newGameBlocksSlideRegions do
+            usePreviousSnap(false)
+            red, green, blue = getColor(newGameBlocksSlideRegions[i])
+            if ((red < rm1 + 5) and (red > rm1 - 5) and (green < gm1 + 5) and (green > gm1 - 5) and (blue < bm1 + 5) and (blue > bm1 - 5)) then
+              startRegion = Region(newGameBlocksSlideRegions[i]:getX(),
+              newGameBlocksSlideRegions[i]:getY(),
+              newGameBlocksSlideRegions[i]:getW(),
+              newGameBlocksSlideRegions[i]:getH())
+              --   startRegion:highlight(1)
+              --   finishRegion1:highlight(1)
+              swipe(startRegion, finishRegion1, 0.5)
+              break
+            end
+
+          end
+        end
+      end
+
+      wait(1)
+      usePreviousSnap(false)
+      snapshotColor()
+      rb,gb,bb = getColor(backslashRegion)
+      -- rb2,gb2,bb2 = getColor(backslashRegion2)
+      usePreviousSnap(false)
+      -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+      -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+      if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+        -- --toast("break")
+        break
+      end
+    end
+    -- end
+  end
+  if itsColor then
+    match = true
+    -- print("colors")
+    numberOfTries = 0
+    while true do
+      numberOfTries = numberOfTries + 1
+      if numberOfTries > 50 then
+        break
+      end
+      usePreviousSnap(false)
+      for i, block in ipairs(blocksRegions) do
+        snapshotColor()
+        r,g,b = getColor(block)
+        if not(r == 84 and g == 85 and b == 86) then
+          block:highlight()
+          wait(1)
+          block:highlightOff()
+          click(block)
+          break
+        end
+      end
+      wait(1)
+      usePreviousSnap(false)
+      snapshotColor()
+      rb,gb,bb = getColor(backslashRegion)
+      -- rb2,gb2,bb2 = getColor(backslashRegion2)
+      usePreviousSnap(false)
+      -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+      -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+      if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+        -- --toast("break")
+        break
+      end
+    end
+
+  elseif itsPair then
+    numberOfTries = 0
+    match = true
+    -- print("pair")
+    colors = {}
+    while true do
+      numberOfTries = numberOfTries + 1
+      if numberOfTries > 50 then
+        break
+      end
+      usePreviousSnap(false)
+      for i, block in ipairs(blocksRegions) do
+        snapshotColor()
+        red,green,blue = getColor(block)
+        colors[i] = {red, i}
+      end
+      shouldBreak = false
+      table.sort(colors, function(lhs, rhs) return lhs[1] < rhs[1] end)
+      for i = 1, 8 do
+        if(colors[i][1] == colors[i+1][1]) then
+          blocksRegions[ colors[i][2] ]:highlight()
+          wait(1)
+          blocksRegions[ colors[i][2] ]:highlightOff()
+          click(blocksRegions[ colors[i][2] ])
+          break
+        end
+      end
+      wait(1)
+      usePreviousSnap(false)
+      snapshotColor()
+      rb,gb,bb = getColor(backslashRegion)
+      -- rb2,gb2,bb2 = getColor(backslashRegion2)
+      usePreviousSnap(false)
+      -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+      -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+      if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+        -- --toast("break")
+        break
+      end
+    end
+
+  elseif itsMatch then
+    match = true
+    -- print("match")
+    numberOfTries = 0
+    while true do
+      numberOfTries = numberOfTries + 1
+      if numberOfTries > 50 then
+        break
+      end
+      usePreviousSnap(false)
+      snapshotColor()
+      mainRed,mainGreen,mainBlue = getColor(mainMatchRegion)
+      for j, block in ipairs(matchRegions) do
+        red,green,blue = getColor(block)
+        if mainRed == red then
+          matchRegions[j]:highlight()
+          wait(1)
+          matchRegions[j]:highlightOff()
+          click(matchRegions[j])
+          break
+        end
+      end
+      wait(1)
+      usePreviousSnap(false)
+      snapshotColor()
+      rb,gb,bb = getColor(backslashRegion)
+      -- rb2,gb2,bb2 = getColor(backslashRegion2)
+      usePreviousSnap(false)
+      -- if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5) or
+      -- (rb2 < 255 + 5) and (rb2 > 255 - 5) and (gb2 < 255 + 5) and (gb2 > 255 - 5) and (bb2 < 255 + 5) and (bb2 > 255 - 5)) then
+
+      if not((rb < 255 + 5) and (rb > 255 - 5) and (gb < 255 + 5) and (gb > 255 - 5) and (bb < 255 + 5) and (bb > 255 - 5)) then
+        -- --toast("break")
+        break
+      end
+    end
+  end
+
+  if not match then
+    notMatch = notMatch + 1
+    --toast("not match")
+  end
+  
+  if notMatch > 3 then
+    notMatch = 0
+    -- keyevent(187) -- app_switch
+    -- wait(5)
+    -- -- startRegion = Region(450, 1200, 10, 10)
+    -- -- finishRegion = Region(20, 1200, 10, 10)
+    -- -- swipe(startRegion, finishRegion, 0.5)
+    -- click(closeCoinRegion)
+    -- wait(5)
+    -- keyevent(3) -- home
+    -- wait(5)
+    -- keyevent(3) -- home
+    -- wait(5)
+    killApp("network.xyo.coin")
+    wait(5)
+    startApp("network.xyo.coin")
+    wait(10)
+    click(autoCollectRegion)
+  end
+end
