@@ -92,7 +92,7 @@ gpsRegion = Region(490, 170, 10, 10)
 
 autoCollectRegion = Region(205, 860, 10, 10)
 
-resumeRegion = Region(250, 300, 10, 10)
+resumeRegion = Region(245, 300, 10, 10)
 r,g,b = getColor(resumeRegion)
 resumeRegion:highlight()
 print(r,g,b)
